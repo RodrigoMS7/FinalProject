@@ -16,6 +16,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import proyecto2.Application;
 import proyecto2.SessionUsuario;
+import AppPackage.AnimationClass;
 
 /**
  *
@@ -95,7 +96,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        label_logout = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         RRHH = new javax.swing.JMenu();
@@ -129,18 +130,23 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         desktopPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/icons8_Menu_32px_1.png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         desktopPane.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 10, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/thumb-1920-418892.jpg"))); // NOI18N
         desktopPane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 50));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/if_sign-in_59203.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        label_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/if_sign-in_59203.png"))); // NOI18N
+        label_logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                label_logoutMouseClicked(evt);
             }
         });
-        desktopPane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 70, -1, -1));
+        desktopPane.add(label_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 70, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/ampliacion.png"))); // NOI18N
         desktopPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 1088));
@@ -311,7 +317,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+    private void label_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_logoutMouseClicked
         int dialogo = JOptionPane.YES_NO_OPTION;
         int resultado = JOptionPane.showConfirmDialog(null,"¿Está seguro de volver a login?", "Exit", dialogo);
         if(resultado == 0){
@@ -319,7 +325,14 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
             Application.LOGIN_CONTROLLER.logout();
             //Application.LOGIN_CONTROLLER.show();
         }
-    }//GEN-LAST:event_jLabel5MouseClicked
+    }//GEN-LAST:event_label_logoutMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        AnimationClass logout = new AnimationClass();
+        logout.jLabelXRight(-40, 15, 10, 5, this.label_logout);
+        
+        logout.jLabelXLeft(15, -40, 10, 5, this.label_logout);
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -367,7 +380,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -376,6 +388,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenu jefe;
+    private javax.swing.JLabel label_logout;
     private javax.swing.JMenu registrador;
     private javax.swing.JMenu secretaria;
     private javax.swing.JMenuItem secretariaMenuItem;
