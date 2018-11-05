@@ -96,7 +96,11 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         label_logout = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         RRHH = new javax.swing.JMenu();
@@ -138,6 +142,10 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/thumb-1920-418892.jpg"))); // NOI18N
         desktopPane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 50));
 
+        jLabel5.setFont(new java.awt.Font("High Tower Text", 1, 36)); // NOI18N
+        jLabel5.setText("Puesto:");
+        desktopPane.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, -1, -1));
+
         label_logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/if_sign-in_59203.png"))); // NOI18N
         label_logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -145,6 +153,17 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
             }
         });
         desktopPane.add(label_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 70, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("High Tower Text", 1, 36)); // NOI18N
+        jLabel6.setText("Funcionario: ");
+        desktopPane.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("High Tower Text", 1, 36)); // NOI18N
+        jLabel7.setText("Cédula:");
+        desktopPane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/icons8_User_96px_2.png"))); // NOI18N
+        desktopPane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/ampliacion.png"))); // NOI18N
         desktopPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -22, -1, 1100));
@@ -361,6 +380,10 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
