@@ -5,10 +5,15 @@
  */
 package proyecto2.presentation.activos.listado;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import net.sourceforge.barbecue.Barcode;
+import net.sourceforge.barbecue.BarcodeFactory;
 import proyecto2.Application;
 import proyecto2.logic.Activo;
 
@@ -72,8 +77,11 @@ public class ActivosView extends javax.swing.JInternalFrame implements java.util
         codigo = new javax.swing.JLabel();
         asignarFuncionarioButton = new javax.swing.JButton();
         imprimirButton = new javax.swing.JButton();
+        label_codigoBarrasImage = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         activos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,15 +101,20 @@ public class ActivosView extends javax.swing.JInternalFrame implements java.util
         });
         jScrollPane1.setViewportView(activos);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 385, 115));
+        getContentPane().add(codigoFld, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 114, -1));
+
         buscarButton.setText("Buscar");
         buscarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(buscarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         codigo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         codigo.setText("Codigo:");
+        getContentPane().add(codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         asignarFuncionarioButton.setText("Asignar funcionario");
         asignarFuncionarioButton.addActionListener(new java.awt.event.ActionListener() {
@@ -109,49 +122,19 @@ public class ActivosView extends javax.swing.JInternalFrame implements java.util
                 asignarFuncionarioButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(asignarFuncionarioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
 
         imprimirButton.setText("Imprimir ");
+        imprimirButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(imprimirButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
+        getContentPane().add(label_codigoBarrasImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 240, 110));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(codigo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(codigoFld, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(buscarButton)
-                .addGap(141, 141, 141))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(asignarFuncionarioButton)
-                        .addGap(28, 28, 28)
-                        .addComponent(imprimirButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(codigo)
-                    .addComponent(buscarButton)
-                    .addComponent(codigoFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(asignarFuncionarioButton)
-                    .addComponent(imprimirButton))
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
+        jLabel2.setText("Codigo de Barras");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -186,6 +169,29 @@ public class ActivosView extends javax.swing.JInternalFrame implements java.util
         
     }//GEN-LAST:event_activosMouseClicked
 
+    private void imprimirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirButtonActionPerformed
+        Barcode barcode = null;
+        try{
+            int row = activos.getSelectedRow();
+            seleccionado= model.getActivos().getRowAt(row);
+            barcode = BarcodeFactory.createCode39(seleccionado.getCodigo(), true);
+        }catch(Exception ex){   }
+        barcode.setDrawingText(true);
+        
+        barcode.setBarWidth(2);
+        barcode.setBarHeight(60);
+        BufferedImage image = new BufferedImage(300,100, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics = (Graphics2D) image.getGraphics();
+        
+        try{
+            barcode.draw(graphics, 5, 20);
+        }catch(Exception ex){   }
+        ImageIcon icon = new ImageIcon(image);
+        this.label_codigoBarrasImage.setIcon(icon);
+        
+        
+    }//GEN-LAST:event_imprimirButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable activos;
@@ -194,7 +200,9 @@ public class ActivosView extends javax.swing.JInternalFrame implements java.util
     private javax.swing.JLabel codigo;
     private javax.swing.JTextField codigoFld;
     private javax.swing.JButton imprimirButton;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_codigoBarrasImage;
     // End of variables declaration//GEN-END:variables
 
     @Override

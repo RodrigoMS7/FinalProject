@@ -118,6 +118,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         secretariaMenuItem = new javax.swing.JMenuItem();
         administrador = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jefe = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -134,6 +135,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         desktopPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/icons8_Menu_32px_1.png"))); // NOI18N
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -268,6 +270,14 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         });
         administrador.add(jMenuItem3);
 
+        jMenuItem6.setText("Activos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        administrador.add(jMenuItem6);
+
         jMenuBar1.add(administrador);
 
         jefe.setText("Jefe de la OCCB");
@@ -353,6 +363,10 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         logout.jLabelXLeft(15, -40, 10, 5, this.label_logout);
     }//GEN-LAST:event_jLabel4MouseClicked
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        controller.ActivoGeneralShow();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -410,6 +424,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenu jefe;
     private javax.swing.JLabel label_logout;
     private javax.swing.JMenu registrador;

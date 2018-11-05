@@ -89,7 +89,7 @@ public class ActivoGeneralView extends javax.swing.JInternalFrame implements jav
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 578, 120));
 
-        box_clasificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Categoría", "Descripción", "Dependencia", "Responsable" }));
+        box_clasificacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Categoría (Tipo)", "Descripción", "Dependencia", "Responsable" }));
         getContentPane().add(box_clasificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
 
         jLabel1.setText("Búsqueda mediante: ");
@@ -100,7 +100,7 @@ public class ActivoGeneralView extends javax.swing.JInternalFrame implements jav
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-            this.controller.buscar(this.toActivoFromSearch());
+            this.controller.refrescarBusqueda(this.toActivoFromSearch());
         }catch(Exception e){
              JOptionPane.showMessageDialog(this, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE); 
         }
@@ -116,19 +116,34 @@ public class ActivoGeneralView extends javax.swing.JInternalFrame implements jav
 //        
 //    }
 //    
-    Activo toActivoFromSearch(){
-        Activo result = new Activo();
-        if(this.box_clasificacion.getSelectedItem() == "Código")
-            result.setCodigo(this.text_Busca.getText());
-        if(this.box_clasificacion.getSelectedItem() == "Categoría")
-            result.getBien().getCategoria().setTipo(this.text_Busca.getText());
-        if(this.box_clasificacion.getSelectedItem() == "Descripción")
-            result.getBien().setDescripcion(this.text_Busca.getText());
-        if(this.box_clasificacion.getSelectedItem() == "Dependencia")
-            result.getLabor().getDependencia().setNombre(this.text_Busca.getText());
-        if(this.box_clasificacion.getSelectedItem() == "Responsable")
-            result.getLabor().getFuncionario().setNombre(this.text_Busca.getText());
-        return result;
+    String toActivoFromSearch(){
+        //Activo result = new Activo();
+        if(this.box_clasificacion.getSelectedItem() == "Código"){
+            controller.model.setStatus(0);
+            return this.text_Busca.getText();
+        }
+        if(this.box_clasificacion.getSelectedItem() == "Categoría"){
+            controller.model.setStatus(1);
+            return this.text_Busca.getText();
+        }
+        if(this.box_clasificacion.getSelectedItem() == "Descripción"){
+            controller.model.setStatus(2);
+            return this.text_Busca.getText();
+        }
+        if("Jefe de OCCB".equals(controller.model.getRol())){
+            if(this.box_clasificacion.getSelectedItem() == "Dependencia"){
+                controller.model.setStatus(3);
+                return this.text_Busca.getText();
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "No puede buscar por dependencia siendo Administrador", "Información", JOptionPane.ERROR_MESSAGE);
+        }
+        if(this.box_clasificacion.getSelectedItem() == "Responsable"){
+            controller.model.setStatus(4);
+            return this.text_Busca.getText();
+        }
+        return "";
     }
    
     public void toSolicitudFromActivo() throws Exception {
@@ -145,8 +160,7 @@ public class ActivoGeneralView extends javax.swing.JInternalFrame implements jav
         //this.fromActivo(filtro);
         table_Activo.setModel(model.getActivos());
     }
-
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> box_clasificacion;
     private javax.swing.JButton jButton1;

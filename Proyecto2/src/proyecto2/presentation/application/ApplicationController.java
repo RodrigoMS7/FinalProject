@@ -83,6 +83,14 @@ public class ApplicationController {
     public void activosShow(){
         Application.ACTIVOS_CONTROLLER.show();
     }
+    public void ActivoGeneralShow(){
+        try {
+            Application.ACTIVO_GENERAL_CONTROLLER.getView().toSolicitudFromActivo();
+        } catch (Exception ex) {
+            Logger.getLogger(ApplicationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Application.ACTIVO_GENERAL_CONTROLLER.show();
+    }
     
 //     void showBien() {
 //         Application.BIENES_CONTROLLER.show();

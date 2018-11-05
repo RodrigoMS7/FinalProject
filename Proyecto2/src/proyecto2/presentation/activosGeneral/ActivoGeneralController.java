@@ -36,17 +36,26 @@ public class ActivoGeneralController {
         view.setModel(model);
     }
     
-    public void buscar(Activo filter) throws Exception {       
-        model.setFilter(filter);
-        this.refrescarBusqueda();
-    }
+//    public void buscar(String filter) throws Exception {       
+//        //model.setFilter(filter);
+//        this.refrescarBusqueda();
+//    }
     
-    public void refrescarBusqueda() throws Exception {
-       List<Activo> rows = proyecto2.logic.ModelGeneral.instance().searchActivos(model.getFilter());
+    public void refrescarBusqueda(String string) throws Exception {
+       List<Activo> rows = null;
+       if(model.getStatus() == 0)
+        rows = proyecto2.logic.ModelGeneral.instance().searchActivosFromCodigo(string);
+       if(model.getStatus() == 1)
+        rows = proyecto2.logic.ModelGeneral.instance().searchActivosFromCategoria(string);
+       if(model.getStatus() == 2)
+        rows = proyecto2.logic.ModelGeneral.instance().searchActivosFromDescripcion(string);
+       if(model.getStatus() == 3)
+        rows = proyecto2.logic.ModelGeneral.instance().searchActivosFromDependencia2(string);
+       if(model.getStatus() == 4)
+        rows = proyecto2.logic.ModelGeneral.instance().searchActivosFromFuncionario(string);          
        model.setActivos(rows);
        model.commit();
        if (rows.isEmpty()) throw new Exception("Ningún dato coincide");
-
     }
 
     public void buscarFromActivo() throws Exception {
@@ -57,10 +66,14 @@ public class ActivoGeneralController {
        Usuario usuario = (Usuario) sessionUsu.getAttribute("User");
        //String nombre = proyecto2.logic.ModelGeneral.instance().getCodigoDependenciaDesdeLabor(usuario.getFuncionario().getId());
        String puesto = proyecto2.logic.ModelGeneral.instance().getPuestoDeLaborFromActivo(usuario.getFuncionario().getId());
+       model.setRol(puesto);
        List<Activo> rows = null;
-       if("Jefe de RRHH".equals(puesto))
+       if("Jefe de OCCB".equals(puesto)){
+           model.setRol("Jefe de OCCB");
            rows = proyecto2.logic.ModelGeneral.instance().searchAllActivo();
+       }
        if("Administrador".equals(puesto)){
+           model.setRol("Administrador");
            String codigo = proyecto2.logic.ModelGeneral.instance().getCodigoDependenciaDesdeLabor(usuario.getFuncionario().getId());
            rows = proyecto2.logic.ModelGeneral.instance().searchActivosFromDependencia(codigo);
        }

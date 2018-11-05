@@ -59,13 +59,13 @@ public class ActivoGeneralTableModel extends AbstractTableModel {
             case DEPENDENCIA: 
             {
                 if(activo.getLabor().getDependencia()!=null)
-                    return activo.getLabor().getDependencia().getNombre();
+                    return activo.getLabor().getDependencia().getCodigo();
                 else return "Sin asignar";
             }
             case FUNCIONARIO_RESPONSABLE:
             {
                 if(activo.getLabor().getFuncionario()!=null)
-                    return activo.getLabor().getFuncionario().getNombre();
+                    return activo.getLabor().getFuncionario().getId();
                 else return "Sin asignar";
             }
             default: return "";
@@ -75,7 +75,7 @@ public class ActivoGeneralTableModel extends AbstractTableModel {
         return rows.get(row);
     }
 
-    String[] colNames=new String[6];
+    String[] colNames=new String[5];
     public static final int CODIGO = 0;
     public static final int CATEGORIA = 1;
     public static final int DESCRIPCION = 2;

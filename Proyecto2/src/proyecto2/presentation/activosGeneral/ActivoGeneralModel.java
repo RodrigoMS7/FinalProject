@@ -21,11 +21,29 @@ public class ActivoGeneralModel extends java.util.Observable{
     Activo filter;
     ActivoGeneralTableModel activos;
     Activo seleccionada;
-
+    int status;
+    String rol;
+    
     public ActivoGeneralModel() {
         this.reset();
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
     public void reset(){ 
         filter = new Activo();
         List<Activo> rows = new ArrayList<>();

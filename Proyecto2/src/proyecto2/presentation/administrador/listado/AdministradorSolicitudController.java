@@ -87,6 +87,7 @@ public class AdministradorSolicitudController {
     public void borrar(int row) throws ParseException{  
         Solicitud seleccionada = model.getSolicitudes().getRowAt(row); 
         try {
+            proyecto2.logic.ModelGeneral.instance().deleteBienFromSolicitud(seleccionada.getCodigo());
             proyecto2.logic.ModelGeneral.instance().borrarSolicitud(seleccionada);
         } catch (Exception ex) { }
         List<Solicitud> rowsMod = proyecto2.logic.ModelGeneral.instance().searchSolicitudes(model.getFilter());

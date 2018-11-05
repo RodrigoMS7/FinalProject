@@ -15,6 +15,9 @@ import proyecto2.logic.Solicitud;
 import proyecto2.presentation.activos.listado.ActivosController;
 import proyecto2.presentation.activos.listado.ActivosModel;
 import proyecto2.presentation.activos.listado.ActivosView;
+import proyecto2.presentation.activosGeneral.ActivoGeneralController;
+import proyecto2.presentation.activosGeneral.ActivoGeneralModel;
+import proyecto2.presentation.activosGeneral.ActivoGeneralView;
 import proyecto2.presentation.administrador.listado.AdministradorSolicitudController;
 import proyecto2.presentation.administrador.listado.AdministradorSolicitudModel;
 import proyecto2.presentation.administrador.listado.AdministradorSolicitudView;
@@ -199,7 +202,14 @@ public class Application {
         LaborView laborView = new LaborView();
         LaborController laborController = new LaborController(laborView, laborModel, session,ses);
         applicationView.addInternalFrame(laborView);
-        LABOR_CONTOLLER = laborController; 
+        LABOR_CONTOLLER = laborController;
+        
+        ActivoGeneralModel activoGeneralModel = new ActivoGeneralModel();
+        ActivoGeneralView activoGeneralView = new ActivoGeneralView();
+        ActivoGeneralController activoGeneralController = new ActivoGeneralController(activoGeneralView, activoGeneralModel, session, ses);
+        ACTIVO_GENERAL_CONTROLLER = activoGeneralController;
+        applicationView.addInternalFrame(activoGeneralView);
+        //activoGeneralView.setVisible(true);
         
     }
 
@@ -224,6 +234,7 @@ public class Application {
     public static LaborsController LABORS_CONTROLLER;
     public static FuncionariosDependenciaController FUNCIONARIOS_DEPENDENCIA_CONTROLLER;
     public static LaborController LABOR_CONTOLLER;
+    public static ActivoGeneralController ACTIVO_GENERAL_CONTROLLER;
  
     public static final int MODO_AGREGAR = 0;
     public static final int MODO_EDITAR = 1;
