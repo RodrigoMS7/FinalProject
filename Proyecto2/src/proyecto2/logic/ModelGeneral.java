@@ -409,7 +409,7 @@ public class ModelGeneral {
     public List<Solicitud> searchSolicitudesPorVerificar() {
 //         String sql = "select * from solicitud where estado = 'recibido'";
         //String sql ="select * from solicitud s inner join dependencia d on s.dependencia = d.codigo where estado = 'Solicitud recibida'";
-        String sql = "select * from solicitud s inner join dependencia d on s.dependencia = d.codigo where estado = 'porVerificar'";
+        String sql = "select * from solicitud s inner join dependencia d on s.dependencia = d.codigo where estado = 'por verificar'";
         try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = stm.executeQuery(sql);) {
             List<Solicitud> resultado = new ArrayList<Solicitud>();
@@ -417,7 +417,8 @@ public class ModelGeneral {
                 Dependencia dep = new Dependencia();
                 dep.setCodigo(rs.getString("codigo"));
                 dep.setNombre(rs.getString("nombre"));
-                resultado.add(new Solicitud(Integer.parseInt(rs.getString("codigo")), rs.getDate("fecha"), Integer.parseInt(rs.getString("cantidad")), rs.getString("tipoAdquisicion"), rs.getString("estado"), Double.parseDouble(rs.getString("monto")), rs.getString("comprobante"), dep));
+                if(rs.getString("funcionario")==null)
+                    resultado.add(new Solicitud(Integer.parseInt(rs.getString("codigo")), rs.getDate("fecha"), Integer.parseInt(rs.getString("cantidad")), rs.getString("tipoAdquisicion"), rs.getString("estado"), Double.parseDouble(rs.getString("monto")), rs.getString("comprobante"), dep));
             }
             return resultado;
         } catch (SQLException e) {

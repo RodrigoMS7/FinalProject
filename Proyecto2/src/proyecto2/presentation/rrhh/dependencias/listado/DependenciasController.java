@@ -8,6 +8,7 @@ package proyecto2.presentation.rrhh.dependencias.listado;
 import java.awt.Point;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.text.Position;
 import org.hibernate.Session;
 import proyecto2.Application;
 import proyecto2.SessionUsuario;
@@ -93,15 +94,15 @@ public class DependenciasController {
         view.setVisible(false);
     }     
     
-    public void listaFuncionariosDependencia(int row){
+    public void listaFuncionariosDependencia(Point position,int row){
         Dependencia dep= model.getDependencias().getRowAt(row);
         Application.FUNCIONARIOS_DEPENDENCIA_CONTROLLER.setCodigoDependencia(dep.getCodigo());
-        Application.FUNCIONARIOS_DEPENDENCIA_CONTROLLER.show();
+        Application.FUNCIONARIOS_DEPENDENCIA_CONTROLLER.show(position);
     }
 
-    void asignaFuncionario(int row) {
+    void asignaFuncionario(Point position, int row) {
         Dependencia dep= model.getDependencias().getRowAt(row);
         Application.LABOR_CONTOLLER.setCodigoDependencia(dep.getCodigo());
-        Application.LABOR_CONTOLLER.show();     
+        Application.LABOR_CONTOLLER.show(position);     
     }
 }

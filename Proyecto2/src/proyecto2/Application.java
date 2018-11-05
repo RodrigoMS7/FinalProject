@@ -21,7 +21,6 @@ import proyecto2.presentation.administrador.listado.AdministradorSolicitudView;
 import proyecto2.presentation.application.ApplicationController;
 import proyecto2.presentation.application.ApplicationModel;
 import proyecto2.presentation.application.ApplicationView;
-import proyecto2.presentation.registrador.bien.edicion.BienController;
 import proyecto2.presentation.registrador.bien.listado.BienesController;
 import proyecto2.presentation.registrador.bien.listado.BienesModel;
 import proyecto2.presentation.registrador.bien.listado.BienesView;
@@ -207,7 +206,6 @@ public class Application {
     public static FuncionariosController FUNCIONARIOS_CONTROLLER;
     public static DependenciaController DEPENDENCIA_CONTROLLER;
     public static DependenciasController DEPENDENCIAS_CONTROLLER;
-    public static BienController BIEN_CONTROLLER;
     public static ApplicationController APPLICATION_CONTROLLER;
     public static LoginController LOGIN_CONTROLLER;
     public static SolicitudesController SOLICITUDES_CONTROLLER;

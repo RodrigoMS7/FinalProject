@@ -102,8 +102,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         RRHH = new javax.swing.JMenu();
         dependenciasListadoMenuItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        solicitudesMenu = new javax.swing.JMenu();
-        solicitudesMenuItem = new javax.swing.JMenuItem();
         registrador = new javax.swing.JMenu();
         solicitudesRegistrador = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -149,12 +147,11 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         desktopPane.add(label_logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 70, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/ampliacion.png"))); // NOI18N
-        desktopPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 1088));
+        desktopPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -22, -1, 1100));
 
         getContentPane().add(desktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         RRHH.setText("Jefe de RRHH");
-        RRHH.setEnabled(false);
 
         dependenciasListadoMenuItem.setText("Dependencias");
         dependenciasListadoMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -174,22 +171,10 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
 
         jMenuBar1.add(RRHH);
 
-        solicitudesMenu.setText("Solicitudes");
-
-        solicitudesMenuItem.setText("Listado");
-        solicitudesMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                solicitudesMenuItemActionPerformed(evt);
-            }
-        });
-        solicitudesMenu.add(solicitudesMenuItem);
-
-        jMenuBar1.add(solicitudesMenu);
-
         registrador.setText("Registrador");
         registrador.setEnabled(false);
 
-        solicitudesRegistrador.setText("Bien");
+        solicitudesRegistrador.setText("Solicitudes");
         solicitudesRegistrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 solicitudesRegistradorActionPerformed(evt);
@@ -282,10 +267,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        controller.funcionariosShow();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void solicitudesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solicitudesMenuItemActionPerformed
-        controller.solicitudesShow();
-    }//GEN-LAST:event_solicitudesMenuItemActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
        controller.solicitudesJefeShow();
@@ -392,8 +373,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JMenu registrador;
     private javax.swing.JMenu secretaria;
     private javax.swing.JMenuItem secretariaMenuItem;
-    private javax.swing.JMenu solicitudesMenu;
-    private javax.swing.JMenuItem solicitudesMenuItem;
     private javax.swing.JMenuItem solicitudesRegistrador;
     // End of variables declaration//GEN-END:variables
 }

@@ -56,7 +56,8 @@ public class JefeRegistradorController {
 
     public void show(Point position) throws Exception{
         buscar();
-        view.setLocation(position);
+        Point point = new Point (position.x+160, position.y-80);
+        view.setLocation(point);
         this.show();
     }   
     

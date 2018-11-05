@@ -7,7 +7,6 @@
         <Menu class="javax.swing.JMenu" name="RRHH">
           <Properties>
             <Property name="text" type="java.lang.String" value="Jefe de RRHH"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="dependenciasListadoMenuItem">
@@ -28,21 +27,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="solicitudesMenu">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Solicitudes"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="solicitudesMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Listado"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="solicitudesMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="registrador">
           <Properties>
             <Property name="text" type="java.lang.String" value="Registrador"/>
@@ -51,7 +35,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="solicitudesRegistrador">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Bien"/>
+                <Property name="text" type="java.lang.String" value="Solicitudes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="solicitudesRegistradorActionPerformed"/>
@@ -248,7 +232,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="-10" width="-1" height="1088"/>
+              <AbsoluteConstraints x="0" y="-22" width="-1" height="1100"/>
             </Constraint>
           </Constraints>
         </Component>
