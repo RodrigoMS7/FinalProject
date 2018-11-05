@@ -8,6 +8,7 @@ package proyecto2.presentation.occb.jefe.registradores;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import proyecto2.logic.Funcionario;
 
 /**
@@ -119,10 +120,10 @@ public class JefeRegistradorView extends javax.swing.JInternalFrame implements j
 
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
           if(evt.getClickCount() ==2){
-              System.out.println("HOla doble click");
             int row = funcionariosTab.getSelectedRow();
               try {
                   controller.asignaRegistradorAsolicitud(row);
+                  JOptionPane.showMessageDialog(this, "Asignacion Exitosa", "OK", JOptionPane.INFORMATION_MESSAGE);
               } catch (Exception ex) {
                   Logger.getLogger(JefeRegistradorView.class.getName()).log(Level.SEVERE, null, ex);
               }
@@ -131,10 +132,10 @@ public class JefeRegistradorView extends javax.swing.JInternalFrame implements j
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        System.out.println("HOla doble click");
         int row = funcionariosTab.getSelectedRow();
         try {
             controller.asignaRegistradorAsolicitud(row);
+            JOptionPane.showMessageDialog(this, "Asignacion Exitosa", "OK", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(JefeRegistradorView.class.getName()).log(Level.SEVERE, null, ex);
         }

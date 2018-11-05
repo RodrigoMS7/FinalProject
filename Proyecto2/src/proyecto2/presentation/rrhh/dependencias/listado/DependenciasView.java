@@ -229,12 +229,12 @@ public class DependenciasView extends javax.swing.JInternalFrame implements java
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int row = this.dependenciasFld.getSelectedRow();
-        controller.listaFuncionariosDependencia(row);
+        controller.listaFuncionariosDependencia(jButton1.getLocation(),row);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          int row = this.dependenciasFld.getSelectedRow();
-        controller.asignaFuncionario(row);
+        controller.asignaFuncionario(jButton2.getLocation(),row);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

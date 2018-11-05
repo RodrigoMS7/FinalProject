@@ -84,11 +84,12 @@ public class LaborController {
         view.setVisible(true);
     }
 
-    public void show(Point position){
-        view.setLocation(position);
+    public void show(Point position) {
+        Point point = new Point(position.x + 240, position.y - 40);
+        view.setLocation(point);
         this.show();
-    }   
-    
+    }
+
     public void hide() {
         view.setVisible(false);
     }
