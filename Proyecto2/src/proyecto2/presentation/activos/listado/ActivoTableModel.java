@@ -44,7 +44,8 @@ public class ActivoTableModel extends AbstractTableModel{
         Activo activo = rows.get(row);
         switch(cols[col]){
             case CODIGO : return activo.getCodigo();
-            case DEPENDENCIA: 
+            case DEPENDENCIA: return "Sin asignar";
+            case FUNCIONARIO: return "Sin asignar";
 //            {
 //                if(activo.getLabor().getDependencia()!=null)
 //                    return activo.getLabor().getDependencia().getCodigo();

@@ -44,7 +44,7 @@ public class ActivosModel extends java.util.Observable{
     }
 
     public void setActivos(List<Activo> activos){
-        int[] cols={ActivoTableModel.CODIGO/*,ActivoTableModel.DEPENDENCIA,ActivoTableModel.FUNCIONARIO*/};
+        int[] cols={ActivoTableModel.CODIGO,ActivoTableModel.DEPENDENCIA,ActivoTableModel.FUNCIONARIO};
         this.activos= new ActivoTableModel(cols,activos);
     }
 
