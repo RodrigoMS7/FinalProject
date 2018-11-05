@@ -313,6 +313,18 @@ public class ModelGeneral {
         }
         return 0;
     }
+    
+    public String getPuestoDeLaborFromActivo(String id){
+        String sql = "select * from labor a inner join puesto p on a.puesto = p.id_puesto where funcionario = '" + id + "'";
+        try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = stm.executeQuery(sql);) {
+            while (rs.next()) {
+                String puesto = rs.getString("nombre");
+                return puesto;
+            }
+        } catch (SQLException e) {        }
+       return "";
+    }
 
     public String getCodigoDependenciaDesdeLabor(String id) throws Exception {
         String sql = "select dependencia from labor where funcionario= '" + id + "'";
@@ -559,6 +571,29 @@ public class ModelGeneral {
             return null;
         }
     }
+    
+    public List<Activo> searchAllActivo() {
+        String sql = "select * from activo a inner join bien b on a.bien = b.codigo inner join labor l on a.labor = l.id_labor inner join categoria c on a.categoria = c.id_categoria";
+        //String sql = "select * from activo a inner join bien b on a.bien = b.codigo inner join categoria c on b.categoria = c.id_categoria";
+        try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs = stm.executeQuery(sql);) {
+            List<Activo> resultado = new ArrayList<Activo>();
+            //Labor labor = new Labor();
+            while (rs.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setTipo(rs.getString("tipo"));
+                
+                Bien bien = new Bien();
+                bien.setDescripcion(rs.getString("descripcion"));
+                //bien.se
+                
+                //resultado.add(new Activo(rs.getString("codigo"),/*(Bien) rs.getObject("bien")*/,/*(Labor) rs.getObject("labor")*/));
+            }
+            return resultado;
+        } catch (SQLException e) {
+            return null;
+        }
+     }
 
 //    public int getUltimoCodigoSolicitud(){ BORRAR
 //        String sql = "select * from solicitud";
@@ -610,6 +645,36 @@ public class ModelGeneral {
         } catch (SQLException e) {
             return null;
         }
+    }
+    
+    public List<Activo> searchActivosFromDependencia(String codigo) {
+        String sql = "select * from activo a inner join labor l on a.labor = l.id_labor inner join dependencia d on l.dependencia = '" + codigo + "'";
+        try(Statement stm= proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs= stm.executeQuery(sql);){
+            List<Activo> resultado = new ArrayList<Activo>();
+            while(rs.next()){
+                //´probando
+                Dependencia d = new Dependencia();
+                d.setCodigo(rs.getString("dependencia"));
+                d.setNombre(rs.getString("nombre"));
+                Funcionario f = new Funcionario();
+                f.setId(rs.getString("funcionario"));              
+                //Puesto p = new Puesto();
+                //p.setNombre(rs.getString("nombre"));
+                Labor labor = new Labor(d,f/*,p*/);
+                
+                Categoria c = new Categoria();
+                c.setTipo(rs.getString("tipo"));
+                //NO SE SI CARGAR SU CONSECUTIVO
+                Bien bien = new Bien ();
+                bien.setDescripcion(rs.getString("descripcion"));
+                bien.setCategoria(c);
+                
+                resultado.add(new Activo(rs.getString("codigo"), bien/*(Bien) rs.getObject("bien")*/, labor/*(Labor) rs.getObject("labor")*/));
+            }
+            return resultado;
+        }catch(SQLException e){}
+        return null;
     }
 
     public List<Funcionario> searchAllFuncionariosFromDependencia(String codigo) {
