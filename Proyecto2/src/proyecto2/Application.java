@@ -15,13 +15,15 @@ import proyecto2.logic.Solicitud;
 import proyecto2.presentation.activos.listado.ActivosController;
 import proyecto2.presentation.activos.listado.ActivosModel;
 import proyecto2.presentation.activos.listado.ActivosView;
+import proyecto2.presentation.activosGeneral.ActivoGeneralController;
+import proyecto2.presentation.activosGeneral.ActivoGeneralModel;
+import proyecto2.presentation.activosGeneral.ActivoGeneralView;
 import proyecto2.presentation.administrador.listado.AdministradorSolicitudController;
 import proyecto2.presentation.administrador.listado.AdministradorSolicitudModel;
 import proyecto2.presentation.administrador.listado.AdministradorSolicitudView;
 import proyecto2.presentation.application.ApplicationController;
 import proyecto2.presentation.application.ApplicationModel;
 import proyecto2.presentation.application.ApplicationView;
-import proyecto2.presentation.registrador.bien.edicion.BienController;
 import proyecto2.presentation.registrador.bien.listado.BienesController;
 import proyecto2.presentation.registrador.bien.listado.BienesModel;
 import proyecto2.presentation.registrador.bien.listado.BienesView;
@@ -199,7 +201,14 @@ public class Application {
         LaborView laborView = new LaborView();
         LaborController laborController = new LaborController(laborView, laborModel, session,ses);
         applicationView.addInternalFrame(laborView);
-        LABOR_CONTOLLER = laborController; 
+        LABOR_CONTOLLER = laborController;
+        
+        ActivoGeneralModel activoGeneralModel = new ActivoGeneralModel();
+        ActivoGeneralView activoGeneralView = new ActivoGeneralView();
+        ActivoGeneralController activoGeneralController = new ActivoGeneralController(activoGeneralView, activoGeneralModel, session, ses);
+        ACTIVO_GENERAL_CONTROLLER = activoGeneralController;
+        applicationView.addInternalFrame(activoGeneralView);
+        //activoGeneralView.setVisible(true);
         
     }
 
@@ -207,7 +216,6 @@ public class Application {
     public static FuncionariosController FUNCIONARIOS_CONTROLLER;
     public static DependenciaController DEPENDENCIA_CONTROLLER;
     public static DependenciasController DEPENDENCIAS_CONTROLLER;
-    public static BienController BIEN_CONTROLLER;
     public static ApplicationController APPLICATION_CONTROLLER;
     public static LoginController LOGIN_CONTROLLER;
     public static SolicitudesController SOLICITUDES_CONTROLLER;
@@ -224,6 +232,7 @@ public class Application {
     public static LaborsController LABORS_CONTROLLER;
     public static FuncionariosDependenciaController FUNCIONARIOS_DEPENDENCIA_CONTROLLER;
     public static LaborController LABOR_CONTOLLER;
+    public static ActivoGeneralController ACTIVO_GENERAL_CONTROLLER;
  
     public static final int MODO_AGREGAR = 0;
     public static final int MODO_EDITAR = 1;

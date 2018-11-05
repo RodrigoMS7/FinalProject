@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -409,7 +410,7 @@ public class ModelGeneral {
     public List<Solicitud> searchSolicitudesPorVerificar() {
 //         String sql = "select * from solicitud where estado = 'recibido'";
         //String sql ="select * from solicitud s inner join dependencia d on s.dependencia = d.codigo where estado = 'Solicitud recibida'";
-        String sql = "select * from solicitud s inner join dependencia d on s.dependencia = d.codigo where estado = 'porVerificar'";
+        String sql = "select * from solicitud s inner join dependencia d on s.dependencia = d.codigo where estado = 'por verificar'";
         try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = stm.executeQuery(sql);) {
             List<Solicitud> resultado = new ArrayList<Solicitud>();
@@ -417,7 +418,8 @@ public class ModelGeneral {
                 Dependencia dep = new Dependencia();
                 dep.setCodigo(rs.getString("codigo"));
                 dep.setNombre(rs.getString("nombre"));
-                resultado.add(new Solicitud(Integer.parseInt(rs.getString("codigo")), rs.getDate("fecha"), Integer.parseInt(rs.getString("cantidad")), rs.getString("tipoAdquisicion"), rs.getString("estado"), Double.parseDouble(rs.getString("monto")), rs.getString("comprobante"), dep));
+                if(rs.getString("funcionario")==null)
+                    resultado.add(new Solicitud(Integer.parseInt(rs.getString("codigo")), rs.getDate("fecha"), Integer.parseInt(rs.getString("cantidad")), rs.getString("tipoAdquisicion"), rs.getString("estado"), Double.parseDouble(rs.getString("monto")), rs.getString("comprobante"), dep));
             }
             return resultado;
         } catch (SQLException e) {
@@ -573,7 +575,7 @@ public class ModelGeneral {
     }
     
     public List<Activo> searchAllActivo() {
-        String sql = "select * from activo a inner join bien b on a.bien = b.codigo inner join labor l on a.labor = l.id_labor inner join categoria c on a.categoria = c.id_categoria";
+        String sql = "select * from activo a inner join bien b on a.bien = b.codigo inner join labor l on a.labor = l.id_labor inner join categoria c on b.categoria = c.id_categoria";
         //String sql = "select * from activo a inner join bien b on a.bien = b.codigo inner join categoria c on b.categoria = c.id_categoria";
         try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = stm.executeQuery(sql);) {
@@ -585,9 +587,15 @@ public class ModelGeneral {
                 
                 Bien bien = new Bien();
                 bien.setDescripcion(rs.getString("descripcion"));
-                //bien.se
+                bien.setCategoria(categoria);
                 
-                //resultado.add(new Activo(rs.getString("codigo"),/*(Bien) rs.getObject("bien")*/,/*(Labor) rs.getObject("labor")*/));
+                Dependencia dependencia= new Dependencia();
+                dependencia.setCodigo(rs.getString("dependencia"));
+                
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(rs.getString("funcionario"));
+                
+                resultado.add(new Activo(rs.getString("codigo"),bien,new Labor(dependencia, funcionario)));
             }
             return resultado;
         } catch (SQLException e) {
@@ -648,7 +656,7 @@ public class ModelGeneral {
     }
     
     public List<Activo> searchActivosFromDependencia(String codigo) {
-        String sql = "select * from activo a inner join labor l on a.labor = l.id_labor inner join dependencia d on l.dependencia = '" + codigo + "'";
+        String sql = "select * from activo a inner join labor l on a.labor = l.id_labor inner join bien b on a.bien = b.codigo inner join categoria c on b.categoria = c.id_categoria where l.dependencia = '" + codigo + "'";
         try(Statement stm= proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs= stm.executeQuery(sql);){
             List<Activo> resultado = new ArrayList<Activo>();
@@ -656,21 +664,21 @@ public class ModelGeneral {
                 //´probando
                 Dependencia d = new Dependencia();
                 d.setCodigo(rs.getString("dependencia"));
-                d.setNombre(rs.getString("nombre"));
+
                 Funcionario f = new Funcionario();
                 f.setId(rs.getString("funcionario"));              
                 //Puesto p = new Puesto();
                 //p.setNombre(rs.getString("nombre"));
-                Labor labor = new Labor(d,f/*,p*/);
+                Labor labor = new Labor(d,f);
                 
                 Categoria c = new Categoria();
                 c.setTipo(rs.getString("tipo"));
                 //NO SE SI CARGAR SU CONSECUTIVO
-                Bien bien = new Bien ();
+                Bien bien = new Bien();
                 bien.setDescripcion(rs.getString("descripcion"));
                 bien.setCategoria(c);
                 
-                resultado.add(new Activo(rs.getString("codigo"), bien/*(Bien) rs.getObject("bien")*/, labor/*(Labor) rs.getObject("labor")*/));
+                resultado.add(new Activo(rs.getString("codigo"), bien, labor));
             }
             return resultado;
         }catch(SQLException e){}
@@ -733,4 +741,124 @@ public class ModelGeneral {
 //            return null;
 //        }
 //    }
+
+    public void deleteBienFromSolicitud(int solicitud) {
+        String sql = "delete from bien where solicitud like "+ solicitud;
+        try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                PreparedStatement rs = proyecto2.logic.ModelGeneral.getConnection().prepareStatement(sql)) {
+            rs.executeUpdate();
+        } catch (SQLException e) { }
+    }
+
+    public List<Activo> searchActivosFromCodigo(String string) {
+        String sql = "select * from activo a inner join labor l on a.labor = l.id_labor inner join bien b on a.bien = b.codigo inner join categoria c on b.categoria = c.id_categoria where a.codigo = '" + string + "'";
+        try(Statement stm= proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs= stm.executeQuery(sql);){
+            List<Activo> resultado = new ArrayList<Activo>();
+            while(rs.next()){
+                Dependencia dependencia = new Dependencia();
+                dependencia.setCodigo(rs.getString("dependencia"));
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(rs.getString("funcionario"));
+                Categoria categoria = new Categoria();
+                categoria.setTipo(rs.getString("tipo"));
+                Bien bien = new Bien();
+                bien.setDescripcion(rs.getString("descripcion"));
+                bien.setCategoria(categoria);
+                resultado.add(new Activo(rs.getString("codigo"), bien, new Labor(dependencia,funcionario)));
+            }
+            return resultado;
+        }catch(SQLException e){}
+        return null;
+    }
+
+    public List<Activo> searchActivosFromCategoria(String string) {
+        String sql = "select * from activo a inner join labor l on a.labor = l.id_labor inner join bien b on a.bien = b.codigo inner join categoria c on b.categoria = c.id_categoria where b.codigo = '" + string + "'";
+        try(Statement stm= proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs= stm.executeQuery(sql);){
+            List<Activo> resultado = new ArrayList<Activo>();
+            while(rs.next()){
+                Dependencia dependencia = new Dependencia();
+                dependencia.setCodigo(rs.getString("dependencia"));
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(rs.getString("funcionario"));
+                Categoria categoria = new Categoria();
+                categoria.setTipo(rs.getString("tipo"));
+                Bien bien = new Bien();
+                bien.setDescripcion(rs.getString("descripcion"));
+                bien.setCategoria(categoria);
+                resultado.add(new Activo(rs.getString("codigo"), bien, new Labor(dependencia,funcionario)));
+            }
+            return resultado;
+        }catch(SQLException e){}
+        return null;
+    }
+
+    public List<Activo> searchActivosFromDescripcion(String string) {
+        String sql = "select * from activo a inner join labor l on a.labor = l.id_labor inner join bien b on a.bien = b.codigo inner join categoria c on b.categoria = c.id_categoria where b.descripcion = '" + string + "'";
+        try(Statement stm= proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs= stm.executeQuery(sql);){
+            List<Activo> resultado = new ArrayList<Activo>();
+            while(rs.next()){
+                Dependencia dependencia = new Dependencia();
+                dependencia.setCodigo(rs.getString("dependencia"));
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(rs.getString("funcionario"));
+                Categoria categoria = new Categoria();
+                categoria.setTipo(rs.getString("tipo"));
+                Bien bien = new Bien();
+                bien.setDescripcion(rs.getString("descripcion"));
+                bien.setCategoria(categoria);
+                resultado.add(new Activo(rs.getString("codigo"), bien, new Labor(dependencia,funcionario)));
+            }
+            return resultado;
+        }catch(SQLException e){}
+        return null;
+    }
+
+    public List<Activo> searchActivosFromDependencia2(String string) {
+        String sql = "select * from activo a inner join labor l on a.labor = l.id_labor inner join bien b on a.bien = b.codigo inner join categoria c on b.categoria = c.id_categoria where l.dependencia = '" + string + "'";
+        try(Statement stm= proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs= stm.executeQuery(sql);){
+            List<Activo> resultado = new ArrayList<Activo>();
+            while(rs.next()){
+                Dependencia dependencia = new Dependencia();
+                dependencia.setCodigo(rs.getString("dependencia"));
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(rs.getString("funcionario"));
+                Categoria categoria = new Categoria();
+                categoria.setTipo(rs.getString("tipo"));
+                Bien bien = new Bien();
+                bien.setDescripcion(rs.getString("descripcion"));
+                bien.setCategoria(categoria);
+                resultado.add(new Activo(rs.getString("codigo"), bien, new Labor(dependencia,funcionario)));
+            }
+            return resultado;
+        }catch(SQLException e){}
+        return null;
+    }
+
+    public List<Activo> searchActivosFromFuncionario(String string) {
+        String sql = "select * from activo a inner join labor l on a.labor = l.id_labor inner join bien b on a.bien = b.codigo inner join categoria c on b.categoria = c.id_categoria where l.funcionario = '" + string + "'";
+        try(Statement stm= proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs= stm.executeQuery(sql);){
+            List<Activo> resultado = new ArrayList<Activo>();
+            while(rs.next()){
+                Dependencia dependencia = new Dependencia();
+                dependencia.setCodigo(rs.getString("dependencia"));
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(rs.getString("funcionario"));
+                Categoria categoria = new Categoria();
+                categoria.setTipo(rs.getString("tipo"));
+                Bien bien = new Bien();
+                bien.setDescripcion(rs.getString("descripcion"));
+                bien.setCategoria(categoria);
+                resultado.add(new Activo(rs.getString("codigo"), bien, new Labor(dependencia,funcionario)));
+            }
+            return resultado;
+        }catch(SQLException e){}
+        return null;
+    }
+   
+    
 }

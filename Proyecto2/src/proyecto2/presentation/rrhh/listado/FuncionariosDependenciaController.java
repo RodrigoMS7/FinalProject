@@ -72,7 +72,8 @@ public class FuncionariosDependenciaController {
     }
 
     public void show(Point position){
-        view.setLocation(position);
+        Point point = new Point (position.x+160, position.y-40);
+        view.setLocation(point);
         this.show();
     }   
     public void setCodigoDependencia(String codigo){

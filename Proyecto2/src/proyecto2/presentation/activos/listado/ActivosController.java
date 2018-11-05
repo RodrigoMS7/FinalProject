@@ -37,7 +37,6 @@ public class ActivosController {
     }
     
     public void refrescarBusqueda() throws Exception{
-       
         List<Activo> rows= proyecto2.logic.ModelGeneral.instance().searchActivos(model.getFilter());
         model.setActivos(rows);
         model.commit();

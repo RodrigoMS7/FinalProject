@@ -106,8 +106,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         RRHH = new javax.swing.JMenu();
         dependenciasListadoMenuItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        solicitudesMenu = new javax.swing.JMenu();
-        solicitudesMenuItem = new javax.swing.JMenuItem();
         registrador = new javax.swing.JMenu();
         solicitudesRegistrador = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -118,6 +116,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         secretariaMenuItem = new javax.swing.JMenuItem();
         administrador = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jefe = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -134,6 +133,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         desktopPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/icons8_Menu_32px_1.png"))); // NOI18N
+        jLabel4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -168,12 +168,11 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         desktopPane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/ampliacion.png"))); // NOI18N
-        desktopPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 1088));
+        desktopPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -22, -1, 1100));
 
         getContentPane().add(desktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         RRHH.setText("Jefe de RRHH");
-        RRHH.setEnabled(false);
 
         dependenciasListadoMenuItem.setText("Dependencias");
         dependenciasListadoMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -193,22 +192,10 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
 
         jMenuBar1.add(RRHH);
 
-        solicitudesMenu.setText("Solicitudes");
-
-        solicitudesMenuItem.setText("Listado");
-        solicitudesMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                solicitudesMenuItemActionPerformed(evt);
-            }
-        });
-        solicitudesMenu.add(solicitudesMenuItem);
-
-        jMenuBar1.add(solicitudesMenu);
-
         registrador.setText("Registrador");
         registrador.setEnabled(false);
 
-        solicitudesRegistrador.setText("Bien");
+        solicitudesRegistrador.setText("Solicitudes");
         solicitudesRegistrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 solicitudesRegistradorActionPerformed(evt);
@@ -268,6 +255,14 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         });
         administrador.add(jMenuItem3);
 
+        jMenuItem6.setText("Activos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        administrador.add(jMenuItem6);
+
         jMenuBar1.add(administrador);
 
         jefe.setText("Jefe de la OCCB");
@@ -301,10 +296,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        controller.funcionariosShow();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void solicitudesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solicitudesMenuItemActionPerformed
-        controller.solicitudesShow();
-    }//GEN-LAST:event_solicitudesMenuItemActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
        controller.solicitudesJefeShow();
@@ -352,6 +343,10 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         
         logout.jLabelXLeft(15, -40, 10, 5, this.label_logout);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        controller.ActivoGeneralShow();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -410,13 +405,12 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenu jefe;
     private javax.swing.JLabel label_logout;
     private javax.swing.JMenu registrador;
     private javax.swing.JMenu secretaria;
     private javax.swing.JMenuItem secretariaMenuItem;
-    private javax.swing.JMenu solicitudesMenu;
-    private javax.swing.JMenuItem solicitudesMenuItem;
     private javax.swing.JMenuItem solicitudesRegistrador;
     // End of variables declaration//GEN-END:variables
 }
