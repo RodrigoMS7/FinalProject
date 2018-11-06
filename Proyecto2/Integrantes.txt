@@ -1,0 +1,11 @@
+Universidad Nacional de Costa Rica 
+II Proyecto Programación III
+Sistema Activos 
+
+Integrantes: 
+Rodrigo Melendez Sibaja
+Daniela Reyes 
+Oscar Ríos Pérez
+
+Para el correcto funcionamiento de este proyecto se deben incluir las librerías AnimatonClass y barbecue-1.5-beta1, además del driver mysql-connector-java-5.1.47
+las cuales se encuentran provistas en la carpeta de este mismo.
