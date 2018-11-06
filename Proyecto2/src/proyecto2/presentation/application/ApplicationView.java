@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import proyecto2.Application;
 import proyecto2.SessionUsuario;
 import AppPackage.AnimationClass;
+import javax.swing.ImageIcon;
+import proyecto2.logic.Labor;
 
 /**
  *
@@ -49,6 +51,20 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         
         this.setLocationRelativeTo(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.jLabel9.setVisible(false);
+        this.label_Dependencia.setVisible(false);
+        this.setIconImage(new ImageIcon(getClass().getResource("/proyecto2/presentation/login_usuario/images/100.png")).getImage());
+        this.setTitle("Menú Principal");
+        
+        secretaria.setEnabled(false);
+
+        jefe.setEnabled(false);
+
+        registrador.setEnabled(false);
+
+        administrador.setEnabled(false);
+
+        RRHH.setEnabled(false);
         //this.setSize(this.getMaximumSize());
     }
     @Override
@@ -65,7 +81,9 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
        try{
         this.desktopPane.add(f);
        } catch(Exception ex){ }
-   }
+    }
+    
+    
     public void habilitaSecretario(){
         secretaria.setEnabled(true);
     }
@@ -82,6 +100,29 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     public void habilitaRRHH() {
         RRHH.setEnabled(true);
         //RRHH.setForeground(Color.GRAY);
+    }
+    
+    
+    
+    public void modificarFuncionario(Labor labor){
+        this.label_Funcionario.setText(labor.getFuncionario().getNombre());
+    }
+    
+    public void modificarCédula(Labor labor){
+        this.label_Cedula.setText(labor.getFuncionario().getId());
+    }
+    
+    public void modificarPuesto(Labor labor){
+        this.label_Puesto.setText(labor.getPuesto().getNombre());
+        if("Administrador".equals(labor.getPuesto().getNombre())){
+            this.modificarDependencia(labor.getDependencia().getNombre());
+        }
+    }
+    
+    public void modificarDependencia(String dependencia){
+        this.jLabel9.setVisible(true);
+        this.label_Dependencia.setVisible(true);
+        this.label_Dependencia.setText(dependencia);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,6 +142,11 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        label_Funcionario = new javax.swing.JLabel();
+        label_Cedula = new javax.swing.JLabel();
+        label_Puesto = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        label_Dependencia = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         RRHH = new javax.swing.JMenu();
@@ -110,8 +156,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         solicitudesRegistrador = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        activosMenu = new javax.swing.JMenu();
-        activosMenuItem = new javax.swing.JMenuItem();
         secretaria = new javax.swing.JMenu();
         secretariaMenuItem = new javax.swing.JMenuItem();
         administrador = new javax.swing.JMenu();
@@ -119,7 +163,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         jMenuItem6 = new javax.swing.JMenuItem();
         jefe = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
@@ -162,10 +205,26 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
 
         jLabel7.setFont(new java.awt.Font("High Tower Text", 1, 36)); // NOI18N
         jLabel7.setText("Cédula:");
-        desktopPane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
+        desktopPane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/icons8_User_96px_2.png"))); // NOI18N
         desktopPane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, -1, -1));
+
+        label_Funcionario.setFont(new java.awt.Font("Baskerville Old Face", 1, 36)); // NOI18N
+        desktopPane.add(label_Funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, 410, 40));
+
+        label_Cedula.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
+        desktopPane.add(label_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 420, 40));
+
+        label_Puesto.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
+        desktopPane.add(label_Puesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, 420, 40));
+
+        jLabel9.setFont(new java.awt.Font("High Tower Text", 1, 36)); // NOI18N
+        jLabel9.setText("Dependencia:");
+        desktopPane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, -1, -1));
+
+        label_Dependencia.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
+        desktopPane.add(label_Dependencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, 420, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/ampliacion.png"))); // NOI18N
         desktopPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -22, -1, 1100));
@@ -192,6 +251,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
 
         jMenuBar1.add(RRHH);
 
+        registrador.setForeground(new java.awt.Color(0, 0, 0));
         registrador.setText("Registrador");
         registrador.setEnabled(false);
 
@@ -220,18 +280,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         registrador.add(jMenuItem4);
 
         jMenuBar1.add(registrador);
-
-        activosMenu.setText("Activos");
-
-        activosMenuItem.setText("Listado");
-        activosMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                activosMenuItemActionPerformed(evt);
-            }
-        });
-        activosMenu.add(activosMenuItem);
-
-        jMenuBar1.add(activosMenu);
 
         secretaria.setText("Secretaria");
 
@@ -277,9 +325,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
 
         jMenuBar1.add(jefe);
 
-        jMenu2.setText("Exit");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -318,13 +363,8 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         controller.categoriaShow();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void activosMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activosMenuItemActionPerformed
-        // TODO add your handling code here:
-        controller.activosShow();
-    }//GEN-LAST:event_activosMenuItemActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+        controller.activosShow();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void label_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_logoutMouseClicked
@@ -385,8 +425,6 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu RRHH;
-    private javax.swing.JMenu activosMenu;
-    private javax.swing.JMenuItem activosMenuItem;
     private javax.swing.JMenu administrador;
     private javax.swing.JMenuItem dependenciasListadoMenuItem;
     private javax.swing.JDesktopPane desktopPane;
@@ -398,7 +436,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -407,6 +445,10 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenu jefe;
+    private javax.swing.JLabel label_Cedula;
+    private javax.swing.JLabel label_Dependencia;
+    private javax.swing.JLabel label_Funcionario;
+    private javax.swing.JLabel label_Puesto;
     private javax.swing.JLabel label_logout;
     private javax.swing.JMenu registrador;
     private javax.swing.JMenu secretaria;
