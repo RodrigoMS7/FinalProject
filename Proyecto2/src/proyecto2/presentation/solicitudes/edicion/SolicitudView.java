@@ -50,6 +50,7 @@ public class SolicitudView extends javax.swing.JInternalFrame implements java.ut
      */
     public SolicitudView() {
         initComponents();
+        this.comboBox_Tipo.setSelectedItem("Compra");
     }
     
     public void hideElimina(){
@@ -106,7 +107,7 @@ public class SolicitudView extends javax.swing.JInternalFrame implements java.ut
 
         label_Tipo.setText("Tipo");
 
-        comboBox_Tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBox_Tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Compra", "Donación", "Producción" }));
 
         label_Comprobante.setText("Comprobante");
 
