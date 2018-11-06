@@ -44,6 +44,20 @@ public class LoginController {
         Application.APPLICATION_CONTROLLER.getView().modificarFuncionario(labor);
         Application.APPLICATION_CONTROLLER.getView().modificarCédula(labor);
         Application.APPLICATION_CONTROLLER.getView().modificarPuesto(labor);
+        
+        
+        if ("Administrador".equals(labor.getPuesto().getNombre()))
+            Application.APPLICATION_CONTROLLER.getView().habilitaAdministrador();
+        if ("Registrador".equals(labor.getPuesto().getNombre()))
+            Application.APPLICATION_CONTROLLER.getView().habilitaRegistrador();
+        if ("Jefe de RRHH".equals(labor.getPuesto().getNombre()))
+            Application.APPLICATION_CONTROLLER.getView().habilitaRRHH();
+        if ("Jefe de OCCB".equals(labor.getPuesto().getNombre()))
+            Application.APPLICATION_CONTROLLER.getView().habilitaJefe();
+        if ("Secretaria".equals(labor.getPuesto().getNombre()))
+            Application.APPLICATION_CONTROLLER.getView().habilitaJefe();
+        
+        
         sessUsu.setAttibute(Application.USER_ATTRIBUTE, real);
         view.setVisible(false);
         Application.APPLICATION_CONTROLLER.setUsuario(real);
