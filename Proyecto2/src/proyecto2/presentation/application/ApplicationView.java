@@ -55,15 +55,10 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         this.label_Dependencia.setVisible(false);
         this.setIconImage(new ImageIcon(getClass().getResource("/proyecto2/presentation/login_usuario/images/100.png")).getImage());
         this.setTitle("Menú Principal");
-        
         secretaria.setEnabled(false);
-
         jefe.setEnabled(false);
-
         registrador.setEnabled(false);
-
         administrador.setEnabled(false);
-
         RRHH.setEnabled(false);
         //this.setSize(this.getMaximumSize());
     }
@@ -368,6 +363,11 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void label_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_label_logoutMouseClicked
+        secretaria.setEnabled(false);
+        jefe.setEnabled(false);
+        registrador.setEnabled(false);
+        administrador.setEnabled(false);
+        RRHH.setEnabled(false);
         int dialogo = JOptionPane.YES_NO_OPTION;
         int resultado = JOptionPane.showConfirmDialog(null,"¿Está seguro de volver a login?", "Exit", dialogo);
         if(resultado == 0){
