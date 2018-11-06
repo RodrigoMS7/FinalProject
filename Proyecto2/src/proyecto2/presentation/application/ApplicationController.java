@@ -31,6 +31,10 @@ public class ApplicationController {
         view.setController(this);
         view.setModel(model);
     }
+
+    public ApplicationView getView() {
+        return view;
+    }
     
     public void setUsuario(Usuario us) {
         usuario = us;

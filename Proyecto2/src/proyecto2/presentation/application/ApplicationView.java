@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import proyecto2.Application;
 import proyecto2.SessionUsuario;
 import AppPackage.AnimationClass;
+import proyecto2.logic.Labor;
 
 /**
  *
@@ -49,6 +50,8 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         
         this.setLocationRelativeTo(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.jLabel9.setVisible(false);
+        this.label_Dependencia.setVisible(false);
         //this.setSize(this.getMaximumSize());
     }
     @Override
@@ -83,6 +86,27 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         RRHH.setEnabled(true);
         //RRHH.setForeground(Color.GRAY);
     }
+    
+    public void modificarFuncionario(Labor labor){
+        this.label_Funcionario.setText(labor.getFuncionario().getNombre());
+    }
+    
+    public void modificarCédula(Labor labor){
+        this.label_Funcionario.setText(labor.getFuncionario().getId());
+    }
+    
+    public void modificarPuesto(Labor labor){
+        this.label_Funcionario.setText(labor.getPuesto().getNombre());
+        if("Administrador".equals(labor.getPuesto().getNombre())){
+            this.modificarDependencia(labor.getDependencia().getNombre());
+        }
+    }
+    
+    public void modificarDependencia(String dependencia){
+        this.jLabel9.setVisible(true);
+        this.label_Dependencia.setVisible(true);
+        this.label_Dependencia.setText(dependencia);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,6 +125,11 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        label_Funcionario = new javax.swing.JLabel();
+        label_Cedula = new javax.swing.JLabel();
+        label_Puesto = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        label_Dependencia = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         RRHH = new javax.swing.JMenu();
@@ -162,10 +191,26 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
 
         jLabel7.setFont(new java.awt.Font("High Tower Text", 1, 36)); // NOI18N
         jLabel7.setText("Cédula:");
-        desktopPane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
+        desktopPane.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/icons8_User_96px_2.png"))); // NOI18N
         desktopPane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, -1, -1));
+
+        label_Funcionario.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        desktopPane.add(label_Funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 420, 40));
+
+        label_Cedula.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        desktopPane.add(label_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 420, 40));
+
+        label_Puesto.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        desktopPane.add(label_Puesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, 420, 40));
+
+        jLabel9.setFont(new java.awt.Font("High Tower Text", 1, 36)); // NOI18N
+        jLabel9.setText("Dependencia:");
+        desktopPane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, -1, -1));
+
+        label_Dependencia.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        desktopPane.add(label_Dependencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, 420, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/ampliacion.png"))); // NOI18N
         desktopPane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -22, -1, 1100));
@@ -398,6 +443,7 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -407,6 +453,10 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenu jefe;
+    private javax.swing.JLabel label_Cedula;
+    private javax.swing.JLabel label_Dependencia;
+    private javax.swing.JLabel label_Funcionario;
+    private javax.swing.JLabel label_Puesto;
     private javax.swing.JLabel label_logout;
     private javax.swing.JMenu registrador;
     private javax.swing.JMenu secretaria;

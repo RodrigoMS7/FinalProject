@@ -859,6 +859,39 @@ public class ModelGeneral {
         }catch(SQLException e){}
         return null;
     }
+
+    public Funcionario getFuncionario(String username) {
+        String sql= "select funcionario from usuario where usuario.username = '"+username+"'";
+        try(Statement stm= proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs= stm.executeQuery(sql);){
+            Funcionario resultado = new Funcionario();
+            while(rs.next()){
+                resultado.setId(rs.getString("funcionario"));
+            }
+            return resultado;
+        }catch(SQLException e){}
+        return null;
+    }
+
+    public Labor getLaborFromFuncionario(String id) {
+        String sql = "select * from labor l inner join dependencia d on l.dependencia = d.codigo inner join puesto p on l.puesto = p.id_puesto inner join funcionario f on l.funcionario = f.id where  funcionario='"+id+"'";
+        try(Statement stm= proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+                ResultSet rs= stm.executeQuery(sql);){
+            Labor resultado = null;
+            while(rs.next()){
+                Funcionario f= new Funcionario();
+                f.setNombre(rs.getString("nombre"));
+                f.setId(rs.getString("id"));
+                Dependencia d = new Dependencia();
+                d.setNombre(rs.getString("nombre"));
+                Puesto p = new Puesto();
+                p.setNombre(rs.getString("nombre"));
+                return new Labor(d,f,p);
+            }
+            return resultado;
+        }catch(SQLException e){}
+        return null;
+    }
    
     
 }

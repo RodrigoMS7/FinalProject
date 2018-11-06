@@ -8,6 +8,7 @@ package proyecto2.presentation.login_usuario;
 import org.hibernate.Session;
 import proyecto2.Application;
 import proyecto2.SessionUsuario;
+import proyecto2.logic.Labor;
 import proyecto2.logic.Usuario;
 
 /**
@@ -36,12 +37,16 @@ public class LoginController {
     public void login(Usuario typed) throws Exception{
         model.setCurrent(typed);
         Usuario real = proyecto2.logic.ModelGeneral.instance().getUsuario(typed.getUsername(), typed.getPassword());
+        real.setFuncionario(proyecto2.logic.ModelGeneral.instance().getFuncionario(real.getUsername()));
+        Labor labor = proyecto2.logic.ModelGeneral.instance().getLaborFromFuncionario(real.getFuncionario().getId());
+        Application.APPLICATION_CONTROLLER.getView().modificarFuncionario(labor);
+        Application.APPLICATION_CONTROLLER.getView().modificarCédula(labor);
+        Application.APPLICATION_CONTROLLER.getView().modificarPuesto(labor);
         sessUsu.setAttibute(Application.USER_ATTRIBUTE, real);
         view.setVisible(false);
         Application.APPLICATION_CONTROLLER.setUsuario(real);
         Application.APPLICATION_CONTROLLER.habilitaBotones();
         Application.APPLICATION_CONTROLLER.enter();
-       
     }   
 
     public void logout(){

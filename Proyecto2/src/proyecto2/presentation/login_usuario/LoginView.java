@@ -265,7 +265,7 @@ public class LoginView extends javax.swing.JFrame implements java.util.Observer 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          try {
                 this.controller.login(this.toUsuario());
-                //Application.APPLICATION_CONTROLLER.show();
+                //pplication.APPLICATION_CONTROLLER.show();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE); 
             }
