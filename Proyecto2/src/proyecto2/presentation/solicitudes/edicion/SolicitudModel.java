@@ -166,4 +166,10 @@ public class SolicitudModel extends java.util.Observable {
         setChanged();
         notifyObservers();
     }
+
+//    Bien removeListaBien(Bien seleccionada) {
+//        for(Bien bien: this.getListaBienes()){
+//            if()
+//        }
+//    }
 }

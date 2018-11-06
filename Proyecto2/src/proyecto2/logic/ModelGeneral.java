@@ -106,6 +106,15 @@ public class ModelGeneral {
         ses.evict(s);
         return s;
     }
+    
+     public void getSolicitud2(int codigo) throws Exception {
+        String sql = "update solicitud set estado = 'por verificar' where codigo = '" + codigo + "'";
+        try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                PreparedStatement rs = proyecto2.logic.ModelGeneral.getConnection().prepareStatement(sql)) {
+            rs.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
 
     public Categoria getCategoria(int codigo) throws Exception {
         Categoria s = (Categoria) ses.get(Categoria.class, codigo);
@@ -486,7 +495,8 @@ public class ModelGeneral {
     }
 
     public List<Solicitud> solicitudesDeRegistrador(String id) {
-        String sql = "select * from solicitud s inner join dependencia d on s.dependencia = d.codigo where funcionario='" + id + "'";
+        String sql = "select * from solicitud s inner join dependencia d on s.dependencia = d.codigo where s.estado='por rotular' or s.estado='procesada' or s.estado = 'por verificar' and funcionario='" + id + "'";
+        System.out.println(sql);
         try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet rs = stm.executeQuery(sql);) {
             List<Solicitud> resultado = new ArrayList<Solicitud>();

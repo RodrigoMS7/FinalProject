@@ -162,6 +162,7 @@ public class LaborView extends javax.swing.JInternalFrame implements java.util.O
         int row = funcionariosTab.getSelectedRow();
         try {
             controller.agregaLabor(row,(Puesto)puesto.getSelectedItem());
+            JOptionPane.showMessageDialog(this, "Asignacion exitosa", "OK", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(LaborView.class.getName()).log(Level.SEVERE, null, ex);
         }
