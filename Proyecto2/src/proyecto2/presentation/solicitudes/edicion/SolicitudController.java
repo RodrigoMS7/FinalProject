@@ -85,24 +85,26 @@ public class SolicitudController {
     }
     
     public void borrarBien(int row)throws Exception { 
-        //Bien seleccionada = model.getBien().getRowAt(row);
-        //switch (model.getModoS()) {
-            //case Application.MODO_AGREGAR:
-                // seleccionada = model.getBien().getRowAt(row);
-                 //Falta
-                //break;
-            //case Application.MODO_EDITAR:
+        Bien seleccionada = model.getBien().getRowAt(row);
+        switch (model.getModoS()) {
+            case Application.MODO_AGREGAR:
                  //seleccionada = model.getBien().getRowAt(row);
-                //try {
-                    //proyecto2.logic.ModelGeneral.instance().borraBien(seleccionada);
-                //} catch (Exception ex) {
-                //}
-                //List<Bien> rowsMod = proyecto2.logic.ModelGeneral.instance().getAllBienesSolicitud(model.getFilter());
-               // model.setBien(rowsMod);
-                //model.commit();
-                //this.refrescarTablaBien();
-                //break;
-        //}
+                 model.listaBienes.remove(seleccionada);
+                 this.refrescarTablaBien();
+                break;
+            case Application.MODO_EDITAR:
+                 seleccionada = model.getBien().getRowAt(row);
+                try {
+                    proyecto2.logic.ModelGeneral.instance().deleteBienFromSolicitud(seleccionada.getSolicitud().getCodigo());
+                    //model.listaBienes.remove(seleccionada);
+                } catch (Exception ex) {
+                }
+                List<Bien> rowsMod = proyecto2.logic.ModelGeneral.instance().getAllBienesSolicitud(model.getFilter());
+                model.setBien(rowsMod);
+                model.commit();
+                this.refrescarTablaBien();
+                break;
+        }
     }
     
 
