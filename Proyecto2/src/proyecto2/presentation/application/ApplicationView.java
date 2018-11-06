@@ -92,11 +92,11 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
     }
     
     public void modificarCédula(Labor labor){
-        this.label_Funcionario.setText(labor.getFuncionario().getId());
+        this.label_Cedula.setText(labor.getFuncionario().getId());
     }
     
     public void modificarPuesto(Labor labor){
-        this.label_Funcionario.setText(labor.getPuesto().getNombre());
+        this.label_Puesto.setText(labor.getPuesto().getNombre());
         if("Administrador".equals(labor.getPuesto().getNombre())){
             this.modificarDependencia(labor.getDependencia().getNombre());
         }
@@ -196,20 +196,20 @@ public class ApplicationView extends javax.swing.JFrame implements java.util.Obs
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/icons8_User_96px_2.png"))); // NOI18N
         desktopPane.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, -1, -1));
 
-        label_Funcionario.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        desktopPane.add(label_Funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 420, 40));
+        label_Funcionario.setFont(new java.awt.Font("Baskerville Old Face", 1, 36)); // NOI18N
+        desktopPane.add(label_Funcionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, 410, 40));
 
-        label_Cedula.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        desktopPane.add(label_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 420, 40));
+        label_Cedula.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
+        desktopPane.add(label_Cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 420, 40));
 
-        label_Puesto.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        label_Puesto.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
         desktopPane.add(label_Puesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, 420, 40));
 
         jLabel9.setFont(new java.awt.Font("High Tower Text", 1, 36)); // NOI18N
         jLabel9.setText("Dependencia:");
         desktopPane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, -1, -1));
 
-        label_Dependencia.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        label_Dependencia.setFont(new java.awt.Font("Baskerville Old Face", 1, 24)); // NOI18N
         desktopPane.add(label_Dependencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, 420, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyecto2/presentation/application/images/ampliacion.png"))); // NOI18N

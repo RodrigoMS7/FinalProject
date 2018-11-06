@@ -38,7 +38,9 @@ public class LoginController {
         model.setCurrent(typed);
         Usuario real = proyecto2.logic.ModelGeneral.instance().getUsuario(typed.getUsername(), typed.getPassword());
         real.setFuncionario(proyecto2.logic.ModelGeneral.instance().getFuncionario(real.getUsername()));
-        Labor labor = proyecto2.logic.ModelGeneral.instance().getLaborFromFuncionario(real.getFuncionario().getId());
+        Labor labor = proyecto2.logic.ModelGeneral.instance().getLaborFuncionarioFromFuncionario(real.getFuncionario().getId());
+        labor.getDependencia().setNombre(proyecto2.logic.ModelGeneral.instance().getLaborDependenciaFromDependencia(labor.getDependencia().getCodigo(), labor.getFuncionario().getId()));
+        labor.getPuesto().setNombre(proyecto2.logic.ModelGeneral.instance().getLaborPuestoFromPuesto(labor.getPuesto().getIdPuesto(), labor.getFuncionario().getId()));
         Application.APPLICATION_CONTROLLER.getView().modificarFuncionario(labor);
         Application.APPLICATION_CONTROLLER.getView().modificarCédula(labor);
         Application.APPLICATION_CONTROLLER.getView().modificarPuesto(labor);
