@@ -151,6 +151,7 @@ public class AdministradorSolicitudView extends javax.swing.JInternalFrame imple
 
     private void button_AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_AgregarActionPerformed
         Application.SOLICITUD_CONTROLLER.getModel().setModoS(Application.MODO_AGREGAR);
+        Application.SOLICITUD_CONTROLLER.getView().showElimina();
         Application.SOLICITUD_CONTROLLER.show();
     }//GEN-LAST:event_button_AgregarActionPerformed
 
@@ -161,6 +162,7 @@ public class AdministradorSolicitudView extends javax.swing.JInternalFrame imple
             if("Solicitud recibida".equals(solicitud.getEstado())){
                 //int col = this.table_Bien.getSelectedColumn();
                 Application.SOLICITUD_CONTROLLER.getModel().setModoS(Application.MODO_EDITAR);
+                Application.SOLICITUD_CONTROLLER.getView().hideElimina();
                 Application.SOLICITUD_CONTROLLER.getModel().setCurrentS(solicitud);
                 Application.SOLICITUD_CONTROLLER.getModel().setListaBienes(new ArrayList<Bien>(solicitud.getBiens()));
                 try {
@@ -178,9 +180,15 @@ public class AdministradorSolicitudView extends javax.swing.JInternalFrame imple
 
     private void button_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_EliminarActionPerformed
         int row = this.table_Solicitud.getSelectedRow();
-        
+        Solicitud solicitud = this.controller.getSeleccionada(row);
         try {
+            if("Solicitud recibida".equals(solicitud.getEstado())){
             controller.borrar(row);
+            JOptionPane.showMessageDialog(this, "La solicitud ya fue eliminada exitosamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "La solicitud ya fue aceptada, no es posible eliminarla", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (ParseException ex) {
             Logger.getLogger(AdministradorSolicitudView.class.getName()).log(Level.SEVERE, null, ex);
         }

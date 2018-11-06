@@ -51,6 +51,10 @@ public class SolicitudView extends javax.swing.JInternalFrame implements java.ut
     public SolicitudView() {
         initComponents();
     }
+    
+    public void hideElimina(){
+        this.button_EliminaBien.setVisible(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -286,9 +290,9 @@ public class SolicitudView extends javax.swing.JInternalFrame implements java.ut
     private void button_EliminaBienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_EliminaBienActionPerformed
         try {
             int row = this.table_Bien.getSelectedRow();
-            int col = this.table_Bien.getSelectedColumn();
+            //nt col = this.table_Bien.getSelectedColumn();
             this.controller.borrarBien(row); //Mandar una excepcion si agrega Dependencia es null
-            JOptionPane.showMessageDialog(this, "Solicitud Eliminada Exitosamente", "OK", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "Bien Eliminada Exitosamente", "OK", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -534,5 +538,9 @@ public class SolicitudView extends javax.swing.JInternalFrame implements java.ut
     private javax.swing.JTextField text_Modelo;
     private javax.swing.JTextField text_Precio;
     // End of variables declaration//GEN-END:variables
+
+    public void showElimina() {
+        this.button_EliminaBien.setVisible(true);
+    }
 
 }

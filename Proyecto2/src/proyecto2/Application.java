@@ -210,6 +210,8 @@ public class Application {
         applicationView.addInternalFrame(activoGeneralView);
         //activoGeneralView.setVisible(true);
         
+        //activosView.setVisible(true);
+        
     }
 
     public static FuncionarioController FUNCIONARIO_CONTROLLER;
