@@ -67,11 +67,9 @@ public class JefeRegistradorController {
     
     public void asignaRegistradorAsolicitud(int row) throws Exception {
         Funcionario seleccionada = model.getFuncionarios().getRowAt(row);
-        Transaction t = session.beginTransaction();
-        System.out.println(model.getCodigoSolicitud());
         Solicitud solicitud = proyecto2.logic.ModelGeneral.instance().getSolicitud(model.getCodigoSolicitud());
-        solicitud.setFuncionario(seleccionada);
-        session.merge(solicitud);
+        Transaction t = session.beginTransaction();
+        proyecto2.logic.ModelGeneral.instance().setFuncionarioSolicitud(seleccionada.getId(), solicitud.getCodigo());
         t.commit();
     }
 }

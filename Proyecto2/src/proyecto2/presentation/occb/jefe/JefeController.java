@@ -58,8 +58,6 @@ public class JefeController {
 
     public void getRegistradores(Point at, int row) throws Exception {
         Solicitud seleccionada = model.getSolicitudes().getRowAt(row);
-////        model.setSeleccionada(seleccionada);
-        System.out.println(seleccionada.getCodigo());
         Application.JEFE_REGISTRADOR_CONTROLLER.setCodigoSolicitud(seleccionada.getCodigo());
         Application.JEFE_REGISTRADOR_CONTROLLER.show(at);
     }

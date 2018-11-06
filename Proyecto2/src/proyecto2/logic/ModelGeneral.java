@@ -99,6 +99,16 @@ public class ModelGeneral {
         ses.evict(b);
         return b;
     }
+//    
+//     public Bien getBien2(int codigo) throws Exception {
+//         String sql = "select bien solicitud set estado = 'por verificar' where codigo = '" + codigo + "'";
+//        try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//                PreparedStatement rs = proyecto2.logic.ModelGeneral.getConnection().prepareStatement(sql)) {
+//            rs.executeUpdate();
+//        } catch (SQLException e) {
+//        }
+//    }
+
 
     public Solicitud getSolicitud(int codigo) throws Exception {
         Solicitud s = (Solicitud) ses.get(Solicitud.class, codigo);
@@ -109,6 +119,24 @@ public class ModelGeneral {
     
      public void getSolicitud2(int codigo) throws Exception {
         String sql = "update solicitud set estado = 'por verificar' where codigo = '" + codigo + "'";
+        try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                PreparedStatement rs = proyecto2.logic.ModelGeneral.getConnection().prepareStatement(sql)) {
+            rs.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+     
+    public void laborUpdate(int codigo, String cod) throws Exception {
+        String sql = "update activo set labor = '"+ codigo+"' where codigo = '" + cod + "'";
+        try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                PreparedStatement rs = proyecto2.logic.ModelGeneral.getConnection().prepareStatement(sql)) {
+            rs.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+     
+     public void setFuncionarioSolicitud(String id, int codigo) throws Exception {
+        String sql = "update solicitud set funcionario = '"+id+"' where codigo= '" + codigo + "'";
         try (Statement stm = proyecto2.logic.ModelGeneral.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 PreparedStatement rs = proyecto2.logic.ModelGeneral.getConnection().prepareStatement(sql)) {
             rs.executeUpdate();

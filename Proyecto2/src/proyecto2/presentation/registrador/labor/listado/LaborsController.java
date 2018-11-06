@@ -65,9 +65,7 @@ public class LaborsController {
     public void asignaLaboraActivo(int row)throws Exception{
         Labor seleccionada = model.getLabors().getRowAt(row);
         Transaction t = session.beginTransaction();
-        Activo a = proyecto2.logic.ModelGeneral.instance().getActivo(model.getCodigoActivo());
-        a.setLabor(seleccionada);
-        session.merge(a);
+        proyecto2.logic.ModelGeneral.instance().laborUpdate(seleccionada.getIdLabor(), model.getCodigoActivo());
         t.commit();
     }
 }
