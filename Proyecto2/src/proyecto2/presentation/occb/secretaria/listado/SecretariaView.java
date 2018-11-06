@@ -95,11 +95,6 @@ public class SecretariaView extends javax.swing.JInternalFrame implements java.u
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        solicitudes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                solicitudesMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(solicitudes);
 
         aceptarButton.setText("Aceptar");
@@ -208,22 +203,13 @@ public class SecretariaView extends javax.swing.JInternalFrame implements java.u
     }//GEN-LAST:event_rechazarButtonActionPerformed
 
     private void aceptarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarButtonActionPerformed
-
+        int row = solicitudes.getSelectedRow();
         try{
-            controller.actualizar(seleccionada,"por verificar");
+            controller.actualizar(row, "por verificar");
+            JOptionPane.showMessageDialog(this, "Solicitud aceptada", "OK", JOptionPane.INFORMATION_MESSAGE);
         }catch(Exception e){}
     }//GEN-LAST:event_aceptarButtonActionPerformed
-   
-    private void solicitudesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitudesMouseClicked
-        // TODO add your handling code here:
-        try{
-            int row=solicitudes.getSelectedRow();
-            seleccionada= model.getSolicitudes().getRowAt(row);
-            
-        }catch(Exception e){
-        }
-    }//GEN-LAST:event_solicitudesMouseClicked
-    
+       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarButton;

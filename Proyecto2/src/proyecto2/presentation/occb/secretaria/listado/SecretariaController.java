@@ -43,11 +43,10 @@ public class SecretariaController {
         if (rows.isEmpty()) throw new Exception("Ningún dato coincide");
     }
     
-    public void actualizar(Solicitud s, String estado)throws Exception{
+    public void actualizar(int row, String estado)throws Exception{
+        Solicitud solicitud = model.getSolicitudes().getRowAt(row);
         Transaction t=session.beginTransaction();
-        Solicitud sol = proyecto2.logic.ModelGeneral.instance().getSolicitud(s.getCodigo());
-        model.setEstado(sol, estado);
-        session.merge(sol);
+        proyecto2.logic.ModelGeneral.instance().getSolicitud2(solicitud.getCodigo());
         t.commit();
         Application.SECRETARIA_CONTROLLER.refrescarBusqueda();
     }

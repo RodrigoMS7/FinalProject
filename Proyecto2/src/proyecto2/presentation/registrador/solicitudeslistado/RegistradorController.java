@@ -37,6 +37,7 @@ public class RegistradorController {
     }
     public void buscarInicio() {
         Usuario usuario = (Usuario) sessionUsu.getAttribute("User");
+        System.out.println(usuario.getFuncionario().getId());
         List<Solicitud> rows = proyecto2.logic.ModelGeneral.instance().solicitudesDeRegistrador(usuario.getFuncionario().getId());
         if (!rows.isEmpty()) {
             model.setSolicitudes(rows);
@@ -53,9 +54,11 @@ public class RegistradorController {
 
     }
     
-    public void muestraBien(int row){
+    public void muestraBien(int row) throws Exception{
         Solicitud seleccionada = model.getSolicitudes().getRowAt(row);
+        if (seleccionada.getEstado().equals("por verificar")) {
         Application.BIENES_CONTROLLER.show(seleccionada);
+        } else throw new Exception("Solo se puede asignar categoria a solicitudes por verificar");
     }
     
     public void reset(){
@@ -76,8 +79,8 @@ public class RegistradorController {
         view.setVisible(false);
     }  
     
-    public void cambiaEstadoSolicitud(String estado, int row) throws Exception{
-        Transaction t=session.beginTransaction();
+    public void cambiaEstadoSolicitud(String estado, int row) throws Exception {
+        Transaction t = session.beginTransaction();
         Solicitud seleccionada = model.getSolicitudes().getRowAt(row);
         Solicitud solicitud = proyecto2.logic.ModelGeneral.instance().getSolicitud(seleccionada.getCodigo());
         solicitud.setEstado(estado);

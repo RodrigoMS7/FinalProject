@@ -56,6 +56,8 @@ public class BienesView extends javax.swing.JInternalFrame implements java.util.
         jTextField1 = new javax.swing.JTextField();
         buttonFunc = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+
         bienes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

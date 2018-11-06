@@ -180,7 +180,11 @@ public class RegistradorView extends javax.swing.JInternalFrame implements java.
     private void solicitudesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_solicitudesMouseClicked
          if (evt.getClickCount() == 2) {
             int row = this.solicitudes.getSelectedRow();
-            controller.muestraBien(row);
+             try { 
+                 controller.muestraBien(row);
+             } catch (Exception ex) {
+                 JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE); 
+             }
             controller.hide();
         }
     }//GEN-LAST:event_solicitudesMouseClicked
@@ -189,6 +193,7 @@ public class RegistradorView extends javax.swing.JInternalFrame implements java.
         int row = this.solicitudes.getSelectedRow();
         try {
             controller.cambiaEstadoSolicitud(this.estadosComboBox1.getSelectedItem().toString(), row);
+            JOptionPane.showMessageDialog(this, "Cambio de estado exitoso", "OK", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(RegistradorView.class.getName()).log(Level.SEVERE, null, ex);
         }
